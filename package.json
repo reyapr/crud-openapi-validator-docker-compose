@@ -10,7 +10,7 @@
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "typeorm": "ts-node ./node_modules/typeorm/cli.js",
-    "test": "jest"
+    "test": "NODE_ENV=test jest"
   },
   "repository": {
     "type": "git",
