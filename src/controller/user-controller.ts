@@ -8,6 +8,16 @@ export class UserController implements IUserController {
   
   constructor (private readonly userService: IUserService) {
     this.router = Router();
+    
+    this.router.get('/', this.findAll.bind(this));
+    this.router.get('/:id', this.findById.bind(this));
+    this.router.post('/', this.create.bind(this));
+    this.router.put('/:id', this.update.bind(this));
+    this.router.delete('/:id', this.softDelete.bind(this));
+  }
+  
+  getRouter(): Router {
+    return this.router;
   }
   
   private static constructUserResponse(user: IUserEntity): IUserResponse {
