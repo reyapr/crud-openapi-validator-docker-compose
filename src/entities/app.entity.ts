@@ -1,7 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn } from 'typeorm';
+import { IUserEntity } from '../interfaces/entity-interfaces';
 
 @Entity('user')
-export class UserEntity {
+export class UserEntity implements IUserEntity {
   @PrimaryGeneratedColumn() 
   id: number;
   
