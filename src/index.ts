@@ -6,7 +6,7 @@ import fs from "fs";
 import * as OpenApiValidator from "express-openapi-validator";
 import yaml from "yaml";
 
-export const createApp = async (): Promise<Express> => {
+export const createApp = async (): Promise<express.Application> => {
 	const app: Express = express();
   const openApiPath = `${__dirname}/../docs/openapi.yaml`;
   const file = fs.readFileSync(openApiPath, "utf8");
