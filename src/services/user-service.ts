@@ -59,7 +59,7 @@ export class UserService implements IUserService {
       console.log('[SUCCESS][UserService] update a user');
       return result!;
     } catch (error) {
-      console.log('[FAILED][UserService] Failed to update a user');g
+      console.log('[FAILED][UserService] Failed to update a user');
       if (error instanceof StandardError) {
         throw error;
       }
