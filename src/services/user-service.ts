@@ -53,7 +53,7 @@ export class UserService implements IUserService {
     }
   }
   
-  async update(id: string, user: IUserDTO): Promise<IUserEntity> {
+  async update(id: string, user: IUserDTO): Promise<number> {
     try {
       console.log({id, user}, '[IN_PROGGESS][UserService] update find a user by id');
       const userExists = await this.userRepository.findById(id);
@@ -65,10 +65,10 @@ export class UserService implements IUserService {
       }
       
       console.log('[IN_PROGGESS][UserService] update a user');
-      const result = await this.userRepository.update(id, user);
+      const affected = await this.userRepository.update(id, user);
       
-      console.log({ result}, '[SUCCESS][UserService] update a user');
-      return result!;
+      console.log({ affected }, '[SUCCESS][UserService] update a user');
+      return affected!;
     } catch (error) {
       console.log(error, '[FAILED][UserService] Failed to update a user');
       if (error instanceof StandardError) {
@@ -82,7 +82,7 @@ export class UserService implements IUserService {
     }
   }
   
-  async softDelete(id: string): Promise<IUserEntity> {
+  async softDelete(id: string): Promise<number> {
     try {
       console.log({id}, '[IN_PROGGESS][UserService] soft delete find a user by id');
       const userExists = await this.userRepository.findById(id);
@@ -100,10 +100,10 @@ export class UserService implements IUserService {
       
       console.log({ softDeleteUserExistReq }, '[IN_PROGGESS][UserService] soft delete a user');
       
-      const result = await this.userRepository.update(id, softDeleteUserExistReq);
+      const affected = await this.userRepository.update(id, softDeleteUserExistReq);
       
-      console.log({ result }, '[SUCCESS][UserService] soft delete a user');
-      return result!;
+      console.log({ result: affected }, '[SUCCESS][UserService] soft delete a user');
+      return affected!;
     } catch (error) {
       console.log(error, '[FAILED][UserService] Failed to soft delete a user');
       if (error instanceof StandardError) {

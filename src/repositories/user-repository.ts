@@ -23,8 +23,8 @@ export class UserRepository implements IUserRepository {
     return await this.repository.save(user);
   }
   
-  async update(id: string, user: IUserDTO): Promise<IUserEntity | null> {
-    return (await this.repository.update(id, user)).raw();
+  async update(id: string, user: IUserDTO): Promise<number> {
+    return (await this.repository.update(id, user)).affected || 0;
   }
   
   async delete(id: string): Promise<void> {

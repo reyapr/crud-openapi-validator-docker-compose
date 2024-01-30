@@ -71,10 +71,9 @@ export class UserController implements IUserController {
     try {
       const { id } = req.params;
       const { name, email, role, password } = req.body;
-      const result = await this.userService.update(id as string, { name, email, role, password });
+      const affected = await this.userService.update(id as string, { name, email, role, password });
       
-      const userResponse: IUserResponse = UserController.constructUserResponse(result);
-      res.status(200).json(userResponse);
+      res.status(200).json({ affected });
     } catch (error) {
       next(error);
     }
@@ -83,10 +82,9 @@ export class UserController implements IUserController {
   async softDelete(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const { id } = req.params;
-      const result = await this.userService.softDelete(id as string);
+      const affected = await this.userService.softDelete(id as string);
       
-      const userResponse: IUserResponse = UserController.constructUserResponse(result);
-      res.status(200).json(userResponse);
+      res.status(200).json({ affected });
     } catch (error) {
       next(error);
     }
