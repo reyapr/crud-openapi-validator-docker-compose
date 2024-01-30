@@ -1,11 +1,11 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { StandardError } from "../utils/standard-error";
 
 export class ErrorMiddleware {
   constructor() {}
   
-  public static async handle(err: Error | StandardError, _: Request, res: Response): Promise<Response> {
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public static handle = (err: Error | StandardError, request: Request, res: Response, next: NextFunction): Response => {
     if (err instanceof StandardError) {
       return res.status(err.error_code).json({
         message: err.message,

@@ -12,5 +12,3 @@ export class StandardError extends Error {
     this.error_code = error_code
   }
 }
-
-module.exports = StandardError
