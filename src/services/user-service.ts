@@ -9,8 +9,14 @@ export class UserService implements IUserService {
     return await this.userRepository.findAll();
   }
   
-  async findById(id: number): Promise<IUserDTO | null>{
-    return await this.userRepository.findById(id);
+  async findById(id: number): Promise<IUserDTO>{
+    const result = await this.userRepository.findById(id);
+    
+    if (!result) {
+      throw new Error('User not found');
+    }
+    
+    return result;
   }
   
   async create(user: IUserDTO): Promise<IUserDTO> {
