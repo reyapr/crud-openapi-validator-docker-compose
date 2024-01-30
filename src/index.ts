@@ -2,9 +2,15 @@ import express, { Express } from "express";
 import { init } from "./init";
 import { ErrorMiddleware } from "./middlewares/error-handler-middleware";
 import { ApiKeyValidationMiddleware } from "./middlewares/api-key-validation-middleware";
+import fs from 'fs';
+import * as OpenApiValidator from "express-openapi-validator";
+import yaml from 'yaml';
 
 const app: Express = express();
 const PORT = process.env.PORT || 3000;
+const openApiPath = `${__dirname}/../docs/openapi.yaml`;
+const file = fs.readFileSync(openApiPath, 'utf8');
+const swaggerDocument = yaml.parse(file);
 
 const setupRoutes = async (app: Express): Promise<void> => {
     const { userController } = await init();
@@ -18,6 +24,11 @@ const setupRoutes = async (app: Express): Promise<void> => {
 };
 
 app.use(express.json());
+app.use(OpenApiValidator.middleware({
+    apiSpec: swaggerDocument,
+    validateRequests: true,
+    validateResponses: true,
+}));
 setupRoutes(app);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
