@@ -6,9 +6,8 @@ import fs from "fs";
 import * as OpenApiValidator from "express-openapi-validator";
 import yaml from "yaml";
 
-(async () => {
-  const app: Express = express();
-  const PORT = process.env.PORT || 3000;
+export const createApp = async (): Promise<Express> => {
+	const app: Express = express();
   const openApiPath = `${__dirname}/../docs/openapi.yaml`;
   const file = fs.readFileSync(openApiPath, "utf8");
   const swaggerDocument = yaml.parse(file);
@@ -39,6 +38,13 @@ import yaml from "yaml";
 
   // error handler
   app.use(ErrorMiddleware.handle);
+	
+	return app;
+};
 
+(async () => {
+  const PORT = process.env.PORT || 3000;
+	const app = await createApp();
+  
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 })();
