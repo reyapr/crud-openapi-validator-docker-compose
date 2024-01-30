@@ -38,6 +38,14 @@ export class UserService implements IUserService {
       return result;
     } catch (error) {
       console.log(error, '[FAILED][UserService] Failed to create a new user');
+      
+      if ((error as Error).message.includes('violates unique constraint')) {
+        throw new StandardError({
+          error_code: ERROR_CODE.USER_ALREADY_EXISTS,
+          message: 'User already exists',
+        });
+      }
+      
       throw new StandardError({
         error_code: ERROR_CODE.INTERNAL_SERVER_ERROR,
         message: 'Failed to create a new user',
@@ -59,7 +67,7 @@ export class UserService implements IUserService {
       console.log('[IN_PROGGESS][UserService] update a user');
       const result = await this.userRepository.update(id, user);
       
-      console.log('[SUCCESS][UserService] update a user');
+      console.log({ result}, '[SUCCESS][UserService] update a user');
       return result!;
     } catch (error) {
       console.log(error, '[FAILED][UserService] Failed to update a user');
