@@ -5,5 +5,5 @@ export interface IUserService {
   findById(id: number): Promise<IUserDTO | null>;
   create(user: IUserDTO): Promise<IUserDTO>;
   update(id: number, user: IUserDTO): Promise<IUserDTO | null>;
-  softDelete(id: number): Promise<void>;
+  softDelete(id: number): Promise<IUserDTO>;
 }

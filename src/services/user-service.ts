@@ -5,15 +5,15 @@ import { IUserService } from "../interfaces/service-interfaces";
 export class UserService implements IUserService {
   constructor(private readonly userRepository: IUserRepository) {}
 
-  async findAll() {
+  async findAll(): Promise<IUserDTO[]> {
     return await this.userRepository.findAll();
   }
   
-  async findById(id: number) {
+  async findById(id: number): Promise<IUserDTO | null>{
     return await this.userRepository.findById(id);
   }
   
-  async create(user: IUserDTO) {
+  async create(user: IUserDTO): Promise<IUserDTO> {
     try {
       console.log('[IN_PROGGESS][UserService] create a new user');
       
@@ -27,7 +27,7 @@ export class UserService implements IUserService {
     }
   }
   
-  async update(id: number, user: IUserDTO) {
+  async update(id: number, user: IUserDTO): Promise<IUserDTO | null> {
     try {
       console.log({id, user}, '[IN_PROGGESS][UserService] update find a user by id');
       const userExists = await this.userRepository.findById(id);
@@ -49,8 +49,7 @@ export class UserService implements IUserService {
     }
   }
   
-  async softDelete(id: number) {
-    
+  async softDelete(id: number): Promise<IUserDTO> {
     try {
       console.log({id}, '[IN_PROGGESS][UserService] soft delete find a user by id');
       const userExists = await this.userRepository.findById(id);
