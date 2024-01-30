@@ -31,7 +31,7 @@
     "@typescript-eslint/eslint-plugin": "^6.19.1",
     "@typescript-eslint/parser": "^6.19.1",
     "eslint": "^8.56.0",
-    "husky": "^9.0.7",
+    "husky": "^4.3.8",
     "lint-staged": "^15.2.0",
     "nodemon": "^3.0.3",
     "ts-node": "^10.9.2",
@@ -44,8 +44,7 @@
   },
   "lint-staged": {
     "*.{js,ts}": [
-      "eslint --fix",
-      "git add"
+      "eslint --fix"
     ]
   }
 }
