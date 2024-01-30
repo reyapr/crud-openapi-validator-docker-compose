@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  pg-test:
+    image: 'postgres:latest'
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_DB=test
+    ports:
+      - 5433:5432
