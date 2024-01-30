@@ -53,6 +53,11 @@ paths:
         content:
           application/json:
             schema:
+              required:
+                - name
+                - email
+                - role
+                - password
               $ref: '#/components/schemas/UserRequest'
       responses:
         '201':
@@ -130,6 +135,10 @@ paths:
         content:
           application/json:
             schema:
+              required:
+                - name
+                - email
+                - role
               $ref: '#/components/schemas/UserRequest'
       responses:
         '200':
@@ -195,6 +204,13 @@ components:
   schemas:
     UserResponse:
       type: object
+      required:
+        - id
+        - name
+        - email
+        - role
+        - created_at
+        - updated_at
       properties:
         id:
           type: string
@@ -218,11 +234,7 @@ components:
           example: 2020-01-01T00:00:00.000Z'
     UserRequest:
       type: object
-      required:
-        - name
-        - email
-        - role
-        - password
+  
       properties:
         name:
           type: string
