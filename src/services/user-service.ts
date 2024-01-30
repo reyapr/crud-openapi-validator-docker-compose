@@ -4,6 +4,7 @@ import { IUserEntity } from "../interfaces/entity-interfaces";
 import { IUserRepository } from "../interfaces/repository-interfaces";
 import { IUserService } from "../interfaces/service-interfaces";
 import { StandardError } from "../utils/standard-error";
+import bcrypt from 'bcrypt';
 
 export class UserService implements IUserService {
   constructor(private readonly userRepository: IUserRepository) {}
@@ -35,8 +36,8 @@ export class UserService implements IUserService {
       
       console.log('[SUCCESS][UserService] create a new user');
       return result;
-    } catch {
-      console.log('[FAILED][UserService] Failed to create a new user');
+    } catch (error) {
+      console.log(error, '[FAILED][UserService] Failed to create a new user');
       throw new StandardError({
         error_code: ERROR_CODE.INTERNAL_SERVER_ERROR,
         message: 'Failed to create a new user',
@@ -61,7 +62,7 @@ export class UserService implements IUserService {
       console.log('[SUCCESS][UserService] update a user');
       return result!;
     } catch (error) {
-      console.log('[FAILED][UserService] Failed to update a user');
+      console.log(error, '[FAILED][UserService] Failed to update a user');
       if (error instanceof StandardError) {
         throw error;
       }
@@ -96,7 +97,7 @@ export class UserService implements IUserService {
       console.log({ result }, '[SUCCESS][UserService] soft delete a user');
       return result!;
     } catch (error) {
-      console.log('[FAILED][UserService] Failed to soft delete a user');
+      console.log(error, '[FAILED][UserService] Failed to soft delete a user');
       if (error instanceof StandardError) {
         throw error;
       }
