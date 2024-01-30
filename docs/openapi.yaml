@@ -146,7 +146,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserResponse'
+                type: object
+                properties:
+                  affected:
+                    type: number
+                    example: 1
         '401':
           description: Unauthorized
           content:
@@ -181,7 +185,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserResponse'
+                type: object
+                properties:
+                  affected:
+                    type: number
+                    example: 1
         '401':
           description: Unauthorized
           content:
@@ -234,7 +242,6 @@ components:
           example: 2020-01-01T00:00:00.000Z'
     UserRequest:
       type: object
-  
       properties:
         name:
           type: string
