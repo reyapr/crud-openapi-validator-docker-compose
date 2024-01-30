@@ -61,7 +61,7 @@ export class UserController implements IUserController {
       const result = await this.userService.create({ name, email, role, password });
       
       const userResponse: IUserResponse = UserController.constructUserResponse(result);
-      res.status(200).json(userResponse);
+      res.status(201).json(userResponse);
     } catch (error) {
       next(error);
     }
