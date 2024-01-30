@@ -1,6 +1,6 @@
 import { DataSource, Repository } from 'typeorm';
 import { IUserEntity } from '../interfaces/entity-interfaces';
-import { UserEntity } from '../entities/app.entity';
+import { UserEntity } from '../entities/user.entity';
 import { IUserRepository } from '../interfaces/repository-interfaces';
 import { IUserDTO } from '../interfaces/dto';
 
