@@ -1,4 +1,4 @@
-import { DataSource, Repository } from 'typeorm';
+import { DataSource, IsNull, Repository } from 'typeorm';
 import { IUserEntity } from '../interfaces/entity-interfaces';
 import { UserEntity } from '../entities/user.entity';
 import { IUserRepository } from '../interfaces/repository-interfaces';
@@ -12,11 +12,11 @@ export class UserRepository implements IUserRepository {
   }
   
   async findAll(): Promise<IUserEntity[]> {
-    return await this.repository.find();
+    return await this.repository.find({ where: { deleted_at: IsNull() }});
   }
   
   async findById(id: string): Promise<IUserEntity | null> {
-    return await this.repository.findOne({ where : { id }});
+    return await this.repository.findOne({ where : { id, deleted_at: IsNull()}});
   }
   
   async create(user: IUserDTO): Promise<IUserEntity> {
