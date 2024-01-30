@@ -49,7 +49,7 @@ export class UserService implements IUserService {
     }
   }
   
-  async softDelete(id: number): Promise<IUserDTO> {
+  async softDelete(id: number): Promise<IUserDTO | null> {
     try {
       console.log({id}, '[IN_PROGGESS][UserService] soft delete find a user by id');
       const userExists = await this.userRepository.findById(id);
