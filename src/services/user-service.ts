@@ -1,7 +1,8 @@
 import { IUserDTO } from "../interfaces/dto";
 import { IUserRepository } from "../interfaces/repository-interfaces";
+import { IUserService } from "../interfaces/service-interfaces";
 
-export class UserService {
+export class UserService implements IUserService {
   constructor(private readonly userRepository: IUserRepository) {}
 
   async findAll() {
