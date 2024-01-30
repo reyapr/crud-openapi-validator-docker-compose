@@ -1,15 +1,16 @@
 import { IUserDTO } from "../interfaces/dto";
+import { IUserEntity } from "../interfaces/entity-interfaces";
 import { IUserRepository } from "../interfaces/repository-interfaces";
 import { IUserService } from "../interfaces/service-interfaces";
 
 export class UserService implements IUserService {
   constructor(private readonly userRepository: IUserRepository) {}
 
-  async findAll(): Promise<IUserDTO[]> {
+  async findAll(): Promise<IUserEntity[]> {
     return await this.userRepository.findAll();
   }
   
-  async findById(id: number): Promise<IUserDTO>{
+  async findById(id: number): Promise<IUserEntity>{
     const result = await this.userRepository.findById(id);
     
     if (!result) {
@@ -19,7 +20,7 @@ export class UserService implements IUserService {
     return result;
   }
   
-  async create(user: IUserDTO): Promise<IUserDTO> {
+  async create(user: IUserDTO): Promise<IUserEntity> {
     try {
       console.log('[IN_PROGGESS][UserService] create a new user');
       
@@ -33,7 +34,7 @@ export class UserService implements IUserService {
     }
   }
   
-  async update(id: number, user: IUserDTO): Promise<IUserDTO> {
+  async update(id: number, user: IUserDTO): Promise<IUserEntity> {
     try {
       console.log({id, user}, '[IN_PROGGESS][UserService] update find a user by id');
       const userExists = await this.userRepository.findById(id);
@@ -55,7 +56,7 @@ export class UserService implements IUserService {
     }
   }
   
-  async softDelete(id: number): Promise<IUserDTO> {
+  async softDelete(id: number): Promise<IUserEntity> {
     try {
       console.log({id}, '[IN_PROGGESS][UserService] soft delete find a user by id');
       const userExists = await this.userRepository.findById(id);
