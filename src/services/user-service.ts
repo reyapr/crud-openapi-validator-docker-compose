@@ -29,7 +29,9 @@ export class UserService implements IUserService {
     try {
       console.log('[IN_PROGGESS][UserService] create a new user');
       
-      const result = await this.userRepository.create(user);
+      const hashedPassword = await bcrypt.hash(user.password, 10);
+      
+      const result = await this.userRepository.create({ ...user, password: hashedPassword});
       
       console.log('[SUCCESS][UserService] create a new user');
       return result;
