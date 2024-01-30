@@ -34,7 +34,7 @@ export class UserService implements IUserService {
     }
   }
   
-  async update(id: number, user: IUserDTO): Promise<IUserEntity> {
+  async update(id: string, user: IUserDTO): Promise<IUserEntity> {
     try {
       console.log({id, user}, '[IN_PROGGESS][UserService] update find a user by id');
       const userExists = await this.userRepository.findById(id);
@@ -56,7 +56,7 @@ export class UserService implements IUserService {
     }
   }
   
-  async softDelete(id: number): Promise<IUserEntity> {
+  async softDelete(id: string): Promise<IUserEntity> {
     try {
       console.log({id}, '[IN_PROGGESS][UserService] soft delete find a user by id');
       const userExists = await this.userRepository.findById(id);
