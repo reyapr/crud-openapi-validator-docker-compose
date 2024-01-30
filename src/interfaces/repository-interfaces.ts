@@ -3,8 +3,8 @@ import { IUserEntity } from "./entity-interfaces";
 
 export interface IUserRepository {
   findAll(): Promise<IUserEntity[]>;
-  findById(id: number): Promise<IUserEntity | null>;
+  findById(id: string): Promise<IUserEntity | null>;
   create(user: IUserDTO): Promise<IUserEntity>;
-  update(id: number, user: IUserDTO): Promise<IUserEntity | null>;
-  delete(id: number): Promise<void>;
+  update(id: string, user: IUserDTO): Promise<IUserEntity | null>;
+  delete(id: string): Promise<void>;
 }

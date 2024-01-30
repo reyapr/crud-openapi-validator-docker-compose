@@ -15,7 +15,7 @@ export class UserRepository implements IUserRepository {
     return await this.repository.find();
   }
   
-  async findById(id: number): Promise<IUserEntity | null> {
+  async findById(id: string): Promise<IUserEntity | null> {
     return await this.repository.findOne({ where : { id }});
   }
   
@@ -23,11 +23,11 @@ export class UserRepository implements IUserRepository {
     return await this.repository.save(user);
   }
   
-  async update(id: number, user: IUserDTO): Promise<IUserEntity | null> {
+  async update(id: string, user: IUserDTO): Promise<IUserEntity | null> {
     return (await this.repository.update(id, user)).raw();
   }
   
-  async delete(id: number): Promise<void> {
+  async delete(id: string): Promise<void> {
     await this.repository.delete(id);
   }
 }

@@ -10,7 +10,7 @@ export class UserService implements IUserService {
     return await this.userRepository.findAll();
   }
   
-  async findById(id: number): Promise<IUserEntity>{
+  async findById(id: string): Promise<IUserEntity>{
     const result = await this.userRepository.findById(id);
     
     if (!result) {

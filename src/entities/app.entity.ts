@@ -4,7 +4,7 @@ import { IUserEntity } from '../interfaces/entity-interfaces';
 @Entity('user')
 export class UserEntity implements IUserEntity {
   @PrimaryGeneratedColumn() 
-  id: number;
+  id: string;
   
   @Column({ length: 255 })
   name: string;
