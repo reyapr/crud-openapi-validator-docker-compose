@@ -53,11 +53,6 @@ paths:
         content:
           application/json:
             schema:
-              required:
-                - name
-                - email
-                - role
-                - password
               $ref: '#/components/schemas/UserRequest'
       responses:
         '201':
@@ -135,11 +130,7 @@ paths:
         content:
           application/json:
             schema:
-              required:
-                - name
-                - email
-                - role
-              $ref: '#/components/schemas/UserRequest'
+              $ref: '#/components/schemas/UserUpdateRequest'
       responses:
         '200':
           description: OK
@@ -242,6 +233,11 @@ components:
           example: 2020-01-01T00:00:00.000Z'
     UserRequest:
       type: object
+      required:
+        - name
+        - email
+        - role
+        - password
       properties:
         name:
           type: string
@@ -255,7 +251,25 @@ components:
           example: user
         password:
           type: string
+          minLength: 8
           example: password
+    UserUpdateRequest:
+      type: object
+      required:
+        - name
+        - email
+        - role
+      properties:
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          pattern: ^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$
+          example: email@test.com
+        role:
+          type: string
+          example: user
     ErrorResponse:
       type: object
       required:
