@@ -41,7 +41,6 @@ export const createApp = async (): Promise<express.Application> => {
 
   return app
 }
-
 ;(async () => {
   const PORT = process.env.PORT || 3000
   const app = await createApp()
