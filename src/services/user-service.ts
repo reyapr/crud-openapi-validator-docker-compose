@@ -3,6 +3,7 @@ import { IUserDTO } from "../interfaces/dto";
 import { IUserEntity } from "../interfaces/entity-interfaces";
 import { IUserRepository } from "../interfaces/repository-interfaces";
 import { IUserService } from "../interfaces/service-interfaces";
+import { logger } from "../utils/logger";
 import { StandardError } from "../utils/standard-error";
 import bcrypt from 'bcrypt';
 
@@ -28,16 +29,16 @@ export class UserService implements IUserService {
   
   async create(user: IUserDTO): Promise<IUserEntity> {
     try {
-      console.log('[IN_PROGGESS][UserService] create a new user');
+      logger.info('[IN_PROGGESS][UserService] create a new user', { request: user });
       
       const hashedPassword = await bcrypt.hash(user.password, 10);
       
       const result = await this.userRepository.create({ ...user, password: hashedPassword});
       
-      console.log('[SUCCESS][UserService] create a new user');
+      logger.info({ result, msg: '[SUCCESS][UserService] create a new user' });
       return result;
     } catch (error) {
-      console.log(error, '[FAILED][UserService] Failed to create a new user');
+      logger.error('[FAILED][UserService] Failed to create a new user', { error });
       
       if ((error as Error).message.includes('violates unique constraint')) {
         throw new StandardError({
@@ -55,7 +56,7 @@ export class UserService implements IUserService {
   
   async update(id: string, user: IUserDTO): Promise<number> {
     try {
-      console.log({id, user}, '[IN_PROGGESS][UserService] update find a user by id');
+      logger.info('[IN_PROGGESS][UserService] update find a user by id', { request: { id, user }});
       const userExists = await this.userRepository.findById(id);
       if (!userExists) {
         throw new StandardError({
@@ -64,13 +65,13 @@ export class UserService implements IUserService {
         });
       }
       
-      console.log('[IN_PROGGESS][UserService] update a user');
+      logger.info('[IN_PROGGESS][UserService] update a user', { request: { id, user }});
       const affected = await this.userRepository.update(id, user);
       
-      console.log({ affected }, '[SUCCESS][UserService] update a user');
+      logger.info({ result: { affected }, msg: '[SUCCESS][UserService] update a user' });
       return affected!;
     } catch (error) {
-      console.log(error, '[FAILED][UserService] Failed to update a user');
+      logger.error('[FAILED][UserService] Failed to update a user', { error });
       if (error instanceof StandardError) {
         throw error;
       }
@@ -84,7 +85,7 @@ export class UserService implements IUserService {
   
   async softDelete(id: string): Promise<number> {
     try {
-      console.log({id}, '[IN_PROGGESS][UserService] soft delete find a user by id');
+      logger.info('[IN_PROGGESS][UserService] soft delete find a user by id', { request: { id } });
       const userExists = await this.userRepository.findById(id);
       if (!userExists) {
         throw new StandardError({
@@ -98,14 +99,14 @@ export class UserService implements IUserService {
         deleted_at: new Date(),
       }
       
-      console.log({ softDeleteUserExistReq }, '[IN_PROGGESS][UserService] soft delete a user');
+      logger.info('[IN_PROGGESS][UserService] soft delete a user', { request: { id, softDeleteUserExistReq }});
       
       const affected = await this.userRepository.update(id, softDeleteUserExistReq);
       
-      console.log({ result: affected }, '[SUCCESS][UserService] soft delete a user');
+      logger.info('[SUCCESS][UserService] soft delete a user', { result: { affected } });
       return affected!;
     } catch (error) {
-      console.log(error, '[FAILED][UserService] Failed to soft delete a user');
+      logger.error('[FAILED][UserService] Failed to soft delete a user', { error });
       if (error instanceof StandardError) {
         throw error;
       }

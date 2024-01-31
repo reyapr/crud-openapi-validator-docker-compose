@@ -104,7 +104,6 @@ describe("API", () => {
         role: 'admin',
         password: 'password123',
       });
-    console.log(response, '<=================== response ==================');
       
     expect(response.status).toBe(201);
     expect(response.body).toEqual(expect.objectContaining({
