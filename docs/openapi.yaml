@@ -241,13 +241,16 @@ components:
       properties:
         name:
           type: string
+          minLength: 1
           example: John Doe
         email:
           type: string
           pattern: ^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$
           example: email@test.com
         role:
-          type: string
+          enum: 
+            - user
+            - admin
           example: user
         password:
           type: string
@@ -262,13 +265,16 @@ components:
       properties:
         name:
           type: string
+          minLength: 1
           example: John Doe
         email:
           type: string
           pattern: ^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$
           example: email@test.com
         role:
-          type: string
+          enum: 
+            - user
+            - admin
           example: user
     ErrorResponse:
       type: object
