@@ -1,29 +1,34 @@
-import { Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn } from 'typeorm';
-import { IUserEntity } from '../interfaces/entity-interfaces';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  UpdateDateColumn
+} from 'typeorm'
+import { IUserEntity } from '../interfaces/entity-interfaces'
 
 @Entity('user')
 export class UserEntity implements IUserEntity {
-  @PrimaryGeneratedColumn() 
-  id: string;
-  
+  @PrimaryGeneratedColumn()
+  id: string
+
   @Column({ length: 255 })
-  name: string;
-  
+  name: string
+
   @Column({ length: 255 })
-  email: string;
-  
+  email: string
+
   @Column({ length: 255 })
-  role: string;
-  
+  role: string
+
   @Column({ length: 255 })
-  password: string;
-  
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
-  created_at: Date;
-  
-  @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
-  updated_at: Date;
-  
+  password: string
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  created_at: Date
+
+  @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  updated_at: Date
+
   @Column({ type: 'timestamp', nullable: true })
-  deleted_at: Date;
+  deleted_at: Date
 }

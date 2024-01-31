@@ -11,11 +11,10 @@ services:
     ports:
       - 5432:5432
   app:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
     ports:
       - ${PORT}:${PORT}
     environment:
       PORT: ${PORT}
-  

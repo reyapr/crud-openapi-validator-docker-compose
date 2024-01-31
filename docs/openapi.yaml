@@ -1,4 +1,3 @@
-
 openapi: 3.0.3
 info:
   title: User API
@@ -248,7 +247,7 @@ components:
           pattern: ^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$
           example: email@test.com
         role:
-          enum: 
+          enum:
             - user
             - admin
           example: user
@@ -272,7 +271,7 @@ components:
           pattern: ^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$
           example: email@test.com
         role:
-          enum: 
+          enum:
             - user
             - admin
           example: user

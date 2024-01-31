@@ -1,4 +1,4 @@
-import winston, { format } from 'winston';
+import winston, { format } from 'winston'
 
 export const logger = winston.createLogger({
   level: 'info',
@@ -9,9 +9,9 @@ export const logger = winston.createLogger({
     format.printf((info) => {
       return `${info.timestamp} - ${info.level}: ${
         info.message
-      } ${JSON.stringify(info.metadata)}`;
+      } ${JSON.stringify(info.metadata)}`
     }),
-    format.json(),
+    format.json()
   ),
   defaultMeta: { service: 'crud-api' },
   transports: [
@@ -20,12 +20,14 @@ export const logger = winston.createLogger({
     // - Write all logs with importance level of `info` or less to `combined.log`
     //
     new winston.transports.File({ filename: 'error.log', level: 'error' }),
-    new winston.transports.File({ filename: 'combined.log' }),
-  ],
-});
+    new winston.transports.File({ filename: 'combined.log' })
+  ]
+})
 
 if (process.env.NODE_ENV !== 'production') {
-  logger.add(new winston.transports.Console({
-    format: winston.format.simple(),
-  }));
+  logger.add(
+    new winston.transports.Console({
+      format: winston.format.simple()
+    })
+  )
 }
